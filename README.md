@@ -1,5 +1,7 @@
 # README #
 
+Simple ES7 based bootstrap (no frameworks etc, just build/render ability, restart)
+
 ### Run ###
 
 * `npm install`
@@ -13,3 +15,4 @@
 ### Todo ###
 
 * Frontend partial reload (HMR)
+* Linters (on commit?) for js/node, css
