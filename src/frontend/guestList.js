@@ -10,4 +10,8 @@ module.exports = [{
     "name": "Bob Miller",
     "phone": "777-888-9999",
     "email": "bobmiller@gmail.com"
+}, {
+    "name": "Nikolay",
+    "phone": "xxx",
+    "email": "j@aol.com"
 }];

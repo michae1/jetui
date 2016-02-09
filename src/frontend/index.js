@@ -1,4 +1,7 @@
-var ShowGuestNames = require('./show.js');
+import ShowGuestNames from './guestsUI.js';
 
-console.log('hello')
 ShowGuestNames();
+
+if (module.hot) {
+    module.hot.accept();
+}

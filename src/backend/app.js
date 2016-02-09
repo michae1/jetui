@@ -1,17 +1,34 @@
-var express = require('express');
-var path = require('path');
+import express from 'express';
+import path from 'path';
 
 var app = express();
 
-// TODO check if dev mode
-app.use(express.static(path.join(__dirname, '../public')));
-app.use('/build', express.static(path.join(__dirname, '../../build')));
+// dev mode things:
+if (app.get('env') === 'development') {
+    console.log('Loading development tools (static files serve, HMR)');
 
+    app.use(express.static(path.join(__dirname, '../public')));
+    app.use('/build', express.static(path.join(__dirname, '../../build')));
 
-// app.get('/', function(req, res){
-//     console.log('hi')
-//     res.send('page');
-// });
+    // HMR related
+    var webpackConfig = require('../../webpack.config');
+
+    var webpackDevMiddleware = require("webpack-dev-middleware");
+    var webpack = require("webpack");
+
+    var compiler = webpack(webpackConfig.frontend);
+
+    app.use(webpackDevMiddleware(compiler, {
+        noInfo: false,
+        lazy: false,
+        publicPath: '/build/static/'
+    }));
+    app.use(require("webpack-hot-middleware")(compiler, {
+        log: console.log,
+        path: '/__webpack_hmr',
+        heartbeat: 10 * 1000
+    }));
+}
 
 console.log("Listening on port 4000...");
 app.listen(4000);
