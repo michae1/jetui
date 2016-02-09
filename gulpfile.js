@@ -4,6 +4,7 @@ var path = require('path');
 var DeepMerge = require('deep-merge');
 var fs = require('fs');
 var nodemon = require('nodemon');
+var webpackConfig = require('./webpack.config');
 
 var deepmerge = DeepMerge(function(target, source, key) {
   if(target instanceof Array) {
@@ -47,23 +48,7 @@ function onBuild(done) {
   }
 }
 
-var frontendConfig = config({
-  entry: './src/frontend/index.js',
-  output: {
-    path: path.join(__dirname, 'build/static'),
-    filename: 'frontend.js'
-  },
-  module: {
-  loaders: 
-    [{
-      test: /\.css$/,
-      loader: 'style!css'
-    }]
-  },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ]
-});
+var frontendConfig = config(webpackConfig.frontend);
 
 // Back 
 var nodeModules = {};
@@ -75,24 +60,7 @@ fs.readdirSync('node_modules')
     nodeModules[mod] = 'commonjs ' + mod;
   });
 
-var backendConfig = config({
-  entry: './src/backend/app.js',
-  target: 'node',
-  output: {
-    path: path.join(__dirname, 'build'),
-    filename: 'backend.js'
-  },
-  node: {
-    __dirname: true,
-    __filename: true
-  },
-  externals: nodeModules,
-  plugins: [
-    new webpack.IgnorePlugin(/\.(css|less)$/),
-    new webpack.BannerPlugin('require("source-map-support").install();',
-                             { raw: true, entryOnly: false })
-  ]
-});
+var backendConfig = config(webpackConfig.backend);
 
 
 gulp.task('frontend-build', function(done) {
@@ -117,14 +85,15 @@ gulp.task('backend-watch', function() {
 gulp.task('build', ['frontend-build', 'backend-build']);
 gulp.task('watch', ['frontend-watch', 'backend-watch']);
 
-gulp.task('run', ['backend-watch', 'frontend-watch'], function() {
+gulp.task('run', ['backend-watch'], function() {
+  console.log('!!! Please note, built frontend asset is in memory')
   nodemon({
     execMap: {
-      js: 'node'
+      js: 'node' 
     },
-    script: path.join(__dirname, 'build/backend'),
+    script: path.join(__dirname, 'build/server/backend'),
     ignore: ['*'],
-    watch: ['foo/'],
+    watch: ['src/backend/', './gulpfile.js'],
     ext: 'noop'
   }).on('restart', function() {
     console.log('Restarted!');
