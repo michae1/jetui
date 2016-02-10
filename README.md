@@ -11,8 +11,8 @@ Simple ES7 based bootstrap (no frameworks etc, just build/render ability, restar
 
 * Backend restart
 * Webpack rebuild (with babel etc)
+* Frontend partial reload (HMR)
 
 ### Todo ###
 
-* Frontend partial reload (HMR)
 * Linters (on commit?) for js/node, css
