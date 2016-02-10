@@ -1,9 +1,9 @@
 module.exports = [{
-    "name": "John Doe",
+    "name": "Madison Right",
     "phone": "111-222-3333",
     "email": "johndoe@aol.com"
 }, {
-    "name": "Heather Smith",
+    "name": "Heather Bauer",
     "phone": "4144-555-6666",
     "email": "janesmith@hotmail.com"
 }, {
@@ -11,7 +11,7 @@ module.exports = [{
     "phone": "777-888-9999",
     "email": "bobmiller@gmail.com"
 }, {
-    "name": "Nikolay",
+    "name": "Nikolay Т",
     "phone": "xxx",
     "email": "j@aol.com"
 }];

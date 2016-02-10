@@ -1,6 +1,7 @@
-import ShowGuestNames from './guestsUI.js';
+import guests from './guestsUI.js';
+import forms from './formUI.js';
 
-ShowGuestNames();
+
 
 if (module.hot) {
     module.hot.accept();
