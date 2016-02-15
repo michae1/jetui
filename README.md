@@ -17,3 +17,4 @@ Simple ES7 based bootstrap (no frameworks etc, just build/render ability, restar
 ### Todo ###
 
 * Linters (on commit?) for js/node, css
+* Sprite operations
