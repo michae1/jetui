@@ -6,13 +6,15 @@ Simple ES7 based bootstrap (no frameworks etc, just build/render ability, restar
 
 * `npm install`
 * `gulp run`
+* go to the http://localhost:4000
 
 ### Working parts ###
 
 * Backend restart
 * Webpack rebuild (with babel etc)
+* Frontend partial reload (HMR)
 
 ### Todo ###
 
-* Frontend partial reload (HMR)
 * Linters (on commit?) for js/node, css
+* Sprite operations
