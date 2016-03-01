@@ -85,7 +85,7 @@ gulp.task('backend-watch', function() {
 gulp.task('build', ['frontend-build', 'backend-build']);
 gulp.task('watch', ['frontend-watch', 'backend-watch']);
 
-gulp.task('run', ['backend-watch'], function() {
+gulp.task('run', ['backend-build', 'backend-watch'], function() {
   console.log('!!! Please note, built frontend asset is in memory')
   nodemon({
     execMap: {
