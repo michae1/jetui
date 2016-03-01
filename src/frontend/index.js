@@ -1,8 +1,6 @@
-import guests from './guestsUI.js';
-import forms from './formUI.js';
+// uncomment to run demo
+// import './demo';
 
 
 
-if (module.hot) {
-    module.hot.accept();
-}
+

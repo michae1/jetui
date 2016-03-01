@@ -1,7 +1,7 @@
 import './style.css';
 
 var sideEffectNode = document.createElement('div');
-document.getElementById('form').appendChild(sideEffectNode);
+document.getElementById('root').appendChild(sideEffectNode);
 
 var input = document.createElement('input');
 input.setAttribute("name", "someInput");

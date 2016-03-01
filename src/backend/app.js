@@ -3,7 +3,7 @@ import path from 'path';
 
 var app = express();
 
-// dev mode things:
+// Dev mode related:
 if (app.get('env') === 'development') {
     console.log('Loading development tools (static files serve, HMR)');
 
@@ -29,6 +29,8 @@ if (app.get('env') === 'development') {
         heartbeat: 10 * 1000
     }));
 }
+
+// Add API etc here
 
 console.log("Listening on port 4000...");
 app.listen(4000);

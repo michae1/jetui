@@ -2,7 +2,7 @@ import GuestList from './guestList';
 import './style.css';
 
 var sideEffectNode = document.createElement('div');
-document.getElementById('list').appendChild(sideEffectNode);
+document.getElementById('root').appendChild(sideEffectNode);
 
 var ul = document.createElement('ul');
 ul.setAttribute("id", "guestsElement");
