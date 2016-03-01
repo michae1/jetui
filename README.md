@@ -6,7 +6,7 @@ Simple ES7 based bootstrap (no frameworks etc, just build/render ability, restar
 
 * `npm install`
 * `gulp run`
-* go to the http://localhost:4000
+* go to the <http://localhost:4000>
 
 ### Demo ###
 
@@ -28,3 +28,4 @@ Add your own remote and you will be able to merge from bootstrap remote.
 
 * Linters (on commit?) for js/node, css
 * Sprite operations
+* Create build for deployment.
