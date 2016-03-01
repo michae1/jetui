@@ -27,3 +27,4 @@ Add your own remote and you will be able to merge from bootstrap remote.
 ### Todo ###
 
 * Linters (on commit?) for js/node, css
+* Sprite operations
