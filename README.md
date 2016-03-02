@@ -26,6 +26,8 @@ Add your own remote and you will be able to merge from bootstrap remote.
 
 ### Todo ###
 
+* Show error for original file (sourcemaps etc)
 * Linters (on commit?) for js/node, css
 * Sprite operations
-* Create build for deployment.
+* Create build for deployment
+* Build performance
