@@ -5,6 +5,7 @@ Simple ES7 based bootstrap (no frameworks etc, just build/render ability, restar
 ### Run ###
 
 * `npm install`
+* `sudo npm install -g gulp`
 * `gulp run`
 * go to the <http://localhost:4000>
 
