@@ -32,3 +32,10 @@ Add your own remote and you will be able to merge from bootstrap remote.
 * Sprite operations
 * Create build for deployment
 * Build performance
+
+### Updating bootstrap ###
+
+* `git checkout master`
+* `git fetch bootstrap`
+* `git merge bootstrap/master`
+*  Do additional steps like npm install etc
