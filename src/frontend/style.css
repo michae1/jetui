@@ -1,0 +1,17 @@
+.quote-box {
+	text-align: center;
+	color: red;
+	margin: 50px;
+}
+
+.destination {
+	display: inline-block;
+}
+
+.date {
+	display: inline-block;
+}
+
+/*.pull-right {
+	text-align: right;
+}*/

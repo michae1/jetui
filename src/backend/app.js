@@ -7,6 +7,8 @@ var app = express();
 if (app.get('env') === 'development') {
     console.log('Loading development tools (static files serve, HMR)');
 
+    require('./api')(app);
+    
     app.use(express.static(path.join(__dirname, '../public')));
     app.use('/build', express.static(path.join(__dirname, '../../build')));
 
