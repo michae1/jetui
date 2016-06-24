@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import AutoComplete from 'material-ui/AutoComplete';
 import MenuItem from 'material-ui/MenuItem';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { enterText } from '../actions/index';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import _ from 'lodash';
 
 const dataSourceConfig = {
@@ -9,7 +11,7 @@ const dataSourceConfig = {
   value: 'valueKey',
 };
 
-export default class Destination extends Component {
+class Destination extends Component {
 	constructor(props) {
 		super(props);
 		this.onUpdateInput = this.onUpdateInput.bind(this);
@@ -24,27 +26,42 @@ export default class Destination extends Component {
 	onUpdateInput(inputValue) {
 		var self = this;
 		console.log('input updated', inputValue)
-		
-
   	}
+
 	render() {
+		console.log('this.props.quoteOrigin', this.props.quoteOrigin)
 		var self = this;
 		const doSearch = _.debounce((term) => { this.props.getDestinations.call(self, term) }, 300);
 
 	    return (
 			<div className='destination'>
-				<MuiThemeProvider>
-					<AutoComplete
+				<AutoComplete
 					floatingLabelText={this.props.direction}
 					filter={AutoComplete.noFilter}
 					openOnFocus={true}
-					onUpdateInput = {doSearch}
-					dataSource={this.state.dataSource}
+					onUpdateInput = {(inputValue) => this.props.enterText(inputValue)}
+					dataSource={this.props.quoteOrigin}
 					dataSourceConfig={dataSourceConfig}
 			    	/
 			    	>
-		    	</MuiThemeProvider>
 		    </div>
 	    );
-  }
+ 	}
 }
+
+function mapStateToProps(state) {
+	// Whatever is returned will show up as props
+	// inside of BookList
+	return {
+		quoteOrigin: state.quoteOrigin
+	};
+}
+
+function mapDispatchToProps(dispatch) {
+  // Whenever selectBook is called, the result shoudl be passed
+  // to all of our reducers
+  return bindActionCreators({ enterText: enterText }, dispatch);
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps )(Destination);

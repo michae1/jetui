@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
+import _ from 'lodash';
 
 export default class Date extends Component {
   render() {
-  	console.log('hi')
+    const realClick = _.debounce((term) => { this.props.onClick() }, 300);
     return (
-      <RaisedButton label="Find" primary={true} />
+      <RaisedButton label="Find" primary={true} onMouseDown={realClick}/>
     );
   }
 }

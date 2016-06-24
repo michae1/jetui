@@ -53,9 +53,6 @@ function destinations( req, res ){
     	term = params.term,
     	url = 'autosuggest/v1.0/UA/USD/en-GB/?query='+term+'&apiKey=pr243571444849292583741347489452';
 
-	
-
-    console.log('before req', url)    
     return instance.get(url)
     	.then(convertSuggestData)
     	.then(function(results){
@@ -74,17 +71,17 @@ function destinations( req, res ){
 
 function cheapest( req, res ){
 	var params = req.query,
-    	origin = params.origin || 'anywhere',
-    	destination = params.destination || 'anywhere',
+    	origin = params.from || 'anywhere',
+    	destination = params.to || 'anywhere',
     	depart = params.depart || 'anytime',
     	returns = params.returns || 'anytime',
     	url = `browseroutes/v1.0/UA/USD/en-US/${origin}/${destination}/${depart}/${returns}?apiKey=prtl6749387986743898559646983194`;
-
+    console.log('url', url)
 	if (!params.origin && !params.destination && !params.depart && !params.returns){
 		res.writeHead( 500 );
 		return false;
 	}
-
+	
     return instance.get(url)
     	.then(convertCheapestData)
     	.then(function(results){

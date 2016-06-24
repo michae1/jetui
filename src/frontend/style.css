@@ -12,6 +12,6 @@
 	display: inline-block;
 }
 
-/*.pull-right {
-	text-align: right;
-}*/
+.results {
+	text-align: center;
+}
