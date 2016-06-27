@@ -12,24 +12,12 @@ const dataSourceConfig = {
 };
 
 class Destination extends Component {
-	constructor(props) {
-		super(props);
-		this.onUpdateInput = this.onUpdateInput.bind(this);
-		this.state = {
-			dataSource : [
-			  {textKey: 'Kiev', valueKey: 'IEV'},
-			  {textKey: 'London', valueKey: 'LON'},
-			],
-			inputValue : ''
-		}
-	}
+
 	onUpdateInput(inputValue) {
 		var self = this;
-		console.log('input updated', inputValue)
   	}
 
 	render() {
-		console.log('this.props.quoteOrigin', this.props.quoteOrigin)
 		var self = this;
 		const doSearch = _.debounce((term) => { this.props.getDestinations.call(self, term) }, 300);
 
@@ -39,7 +27,7 @@ class Destination extends Component {
 					floatingLabelText={this.props.direction}
 					filter={AutoComplete.noFilter}
 					openOnFocus={true}
-					onUpdateInput = {(inputValue) => this.props.enterText(inputValue)}
+					onUpdateInput = { _.debounce((term) => { this.props.enterText(term) }, 300) }
 					dataSource={this.props.quoteOrigin}
 					dataSourceConfig={dataSourceConfig}
 			    	/
@@ -50,16 +38,12 @@ class Destination extends Component {
 }
 
 function mapStateToProps(state) {
-	// Whatever is returned will show up as props
-	// inside of BookList
 	return {
 		quoteOrigin: state.quoteOrigin
 	};
 }
 
 function mapDispatchToProps(dispatch) {
-  // Whenever selectBook is called, the result shoudl be passed
-  // to all of our reducers
   return bindActionCreators({ enterText: enterText }, dispatch);
 }
 

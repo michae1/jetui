@@ -3,7 +3,7 @@ import { combineReducers } from 'redux';
 import QuoteOriginReducer from './reducers_quote';
 
 const rootReducer = combineReducers({
-  quoteOrigin: QuoteOriginReducer,
+	quoteOrigin: QuoteOriginReducer,
 });
 
 export default rootReducer;
