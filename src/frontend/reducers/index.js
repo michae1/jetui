@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux';
 // import ResultsReducer from './reducer_results';
-import QuoteOriginReducer from './reducers_quote';
+import { SuggestReducer, DestinationReducer } from './reducers_quote';
 
 const rootReducer = combineReducers({
-	quoteOrigin: QuoteOriginReducer,
+	quoteSuggests: SuggestReducer,
+	origin: DestinationReducer,
 });
 
 export default rootReducer;

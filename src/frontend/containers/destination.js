@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import AutoComplete from 'material-ui/AutoComplete';
 import MenuItem from 'material-ui/MenuItem';
-import { enterText } from '../actions/index';
+import { enterText, setDestination } from '../actions/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
@@ -13,10 +13,16 @@ const dataSourceConfig = {
 
 class Destination extends Component {
 
-	onUpdateInput(inputValue) {
-		var self = this;
+	onFocusEmpty() {
+		if (!_.get(this.state, 'searchText'))
+			this.props.enterText();
   	}
 
+  	onSelectSuggest(destination) {
+  		console.log('on new')
+		this.props.setDestination(destination);
+  	}
+ 
 	render() {
 		var self = this;
 		const doSearch = _.debounce((term) => { this.props.getDestinations.call(self, term) }, 300);
@@ -27,8 +33,15 @@ class Destination extends Component {
 					floatingLabelText={this.props.direction}
 					filter={AutoComplete.noFilter}
 					openOnFocus={true}
-					onUpdateInput = { _.debounce((term) => { this.props.enterText(term) }, 300) }
-					dataSource={this.props.quoteOrigin}
+					onUpdateInput = { _.debounce((term) => { 
+						this.props.enterText(term); 
+						this.setState({
+		    				searchText: term
+        				}) 
+					}, 300) }
+					onNewRequest = {(x)=>{this.onSelectSuggest(x)}}
+					onFocus = {(x)=>{this.onFocusEmpty()}}
+ 					dataSource={this.props.quoteSuggests}
 					dataSourceConfig={dataSourceConfig}
 			    	/
 			    	>
@@ -39,12 +52,14 @@ class Destination extends Component {
 
 function mapStateToProps(state) {
 	return {
-		quoteOrigin: state.quoteOrigin
+		quoteSuggests: state.quoteSuggests
 	};
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ enterText: enterText }, dispatch);
+  return bindActionCreators({ 
+  	enterText: enterText, 
+  	setDestination: setDestination }, dispatch);
 }
 
 

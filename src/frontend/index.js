@@ -5,7 +5,7 @@ import './style.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import _ from 'lodash';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import reducers from './reducers';
 import thunk from 'redux-thunk';
@@ -16,7 +16,11 @@ injectTapEventPlugin();
 
 ReactDOM.render(
 	<MuiThemeProvider>
-		<Provider store={createStore(reducers, applyMiddleware(thunk))}>
+		<Provider store={createStore(reducers,
+						compose(
+						 	applyMiddleware(thunk), 
+						 	window.devToolsExtension ? window.devToolsExtension() : f => f
+						))}>
 			<App />
 		</Provider>
 	</MuiThemeProvider >	
