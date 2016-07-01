@@ -2,6 +2,8 @@
 
 Simple cheap flights search (React/Redux)
 
+![jetui.png](https://bitbucket.org/repo/9a4Xgr/images/916421502-jetui.png)
+
 ### Run ###
 
 * `npm install`
