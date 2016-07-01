@@ -13,7 +13,6 @@ module.exports = function(app) {
 
     function handleErrors( cb ) {
         return function(req, res, next) {
-    		console.log('handle error?')
             try {
                 return cb.apply( app, arguments );
             } catch( err ) { next( err ) }
@@ -42,7 +41,6 @@ function convertSuggestData(response){
 	return converted;
 }
 function convertCheapestData(response){
-    console.log('conv')
 	var converted = [];
 	if (response.data){
 		converted = response.data;
@@ -64,7 +62,6 @@ function destinations( req, res ){
     return instance.get(url)
     	.then(convertSuggestData)
     	.then(function(results){
-    		console.log('results here', results );
     		if( results ){
                 res.writeHead( 200 );
                 res.end( JSON.stringify(results) );
@@ -78,19 +75,28 @@ function destinations( req, res ){
 }
 
 function cheapest( req, res ){
-	var params = req.query,
+	const params = req.query,
     	origin = params.from || 'anywhere',
     	destination = params.to || 'anywhere',
     	depart = params.depart || 'anytime',
-    	returns = params.returns || 'anytime',
-    	url = `browseroutes/v1.0/UA/USD/en-US/${origin}/${destination}/${depart}/${returns}?apiKey=prtl6749387986743898559646983194`;
-    console.log('url', params)
-	if (!params.from && !params.to && !params.depart && !params.returns){
-		res.status( 500 ).send('Incomplete parameters');
-		return false;
-	}
-    console.log('lets req')
-	
+    	returns = params.returns || 'anytime';
+
+
+
+
+    if (!params.from && !params.to && !params.depart && !params.returns){
+        res.status( 500 ).send('Incomplete parameters');
+        return false;
+    }
+
+    let api_type = "browseroutes";
+    
+    if ( (params.from && params.to) || ( params.from && params.depart ) ){
+        api_type = "browsedates";
+    }
+
+    let url = `${api_type}/v1.0/UA/USD/en-US/${origin}/${destination}/${depart}/${returns}?apiKey=prtl6749387986743898559646983194`;
+    console.log('url', url)
     return instance.get(url)
     	.then(convertCheapestData)
     	.then(function(results){

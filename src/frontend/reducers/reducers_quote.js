@@ -24,7 +24,7 @@ export function OriginReducer(state = [], action) {
 	return state;
 }
 
-export function DepartureReducer(state = [], action) {
+export function DepartureReducer(state = null, action) {
 		switch(action.type) {
 			case 'SET_DATE_DEPARTURE':
 				return action.payload;
@@ -32,7 +32,7 @@ export function DepartureReducer(state = [], action) {
 	return state;
 }
 
-export function ReturnReducer(state = [], action) {
+export function ReturnReducer(state = null, action) {
 		switch(action.type) {
 			case 'SET_DATE_RETURN':
 				return action.payload;

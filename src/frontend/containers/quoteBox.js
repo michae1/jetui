@@ -5,6 +5,7 @@ import FindButton from '../components/findButton';
 import { enterText, setDestination, setDate, getSearchResults } from '../actions/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import moment from 'moment'; 
 import _ from 'lodash';
 
 class QuoteBox extends Component {
@@ -22,12 +23,15 @@ class QuoteBox extends Component {
   	}
 
   	doSearch() {
+  		const ddate = _.get(this.props, 'departureDate'),
+  			rdate = _.get(this.props, 'returnDate');
+  		console.log("rdate", rdate)
   		this.props.getSearchResults({
   			from: _.get(this.props, 'origin.textKey'),
 			to: _.get(this.props, 'destination.textKey'),	
-			depart: _.get(this.props, 'departureDate.textKey'),
-			returns: _.get(this.props, 'returnDate.textKey')
-  		});
+			depart: ddate && moment(ddate).format("YYYY-MM-DD"),
+			returns: rdate && moment(rdate).format("YYYY-MM-DD")
+		});
   	}
 
 	render() {
