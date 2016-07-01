@@ -42,11 +42,19 @@ function convertSuggestData(response){
 	return converted;
 }
 function convertCheapestData(response){
+    console.log('conv')
 	var converted = [];
 	if (response.data){
 		converted = response.data;
 	}
-	return converted;
+	// indexes:
+    var places = {};
+    converted.Places.forEach( (p) => {places[p.PlaceId] = p} )
+    return converted.Quotes.map( (q) => {
+        q.OutboundLeg.origin = places[q.OutboundLeg.OriginId];
+        q.OutboundLeg.destination = places[q.OutboundLeg.DestinationId];
+        return q;
+    } )
 }
 function destinations( req, res ){
     var params = req.query,
@@ -62,7 +70,7 @@ function destinations( req, res ){
                 res.end( JSON.stringify(results) );
             }
             else
-                res.writeHead( 404 );
+                res.status( 404 ).send('No results found');
     	})
     	.catch(function (error) {
 		    console.log('ERR:', error);
@@ -76,11 +84,12 @@ function cheapest( req, res ){
     	depart = params.depart || 'anytime',
     	returns = params.returns || 'anytime',
     	url = `browseroutes/v1.0/UA/USD/en-US/${origin}/${destination}/${depart}/${returns}?apiKey=prtl6749387986743898559646983194`;
-    console.log('url', url)
-	if (!params.origin && !params.destination && !params.depart && !params.returns){
-		res.writeHead( 500 );
+    console.log('url', params)
+	if (!params.from && !params.to && !params.depart && !params.returns){
+		res.status( 500 ).send('Incomplete parameters');
 		return false;
 	}
+    console.log('lets req')
 	
     return instance.get(url)
     	.then(convertCheapestData)
@@ -90,10 +99,11 @@ function cheapest( req, res ){
                 res.end( JSON.stringify(results) );
             }
             else
-                res.writeHead( 404 );
+                res.status( 404 ).send('No results found');
     	})
     	.catch(function (error) {
 		    console.log('ERR:', error);
+            res.status( 500 ).send('Error');
 	  	});
 	
 }
