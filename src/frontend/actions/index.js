@@ -1,4 +1,5 @@
 import axios from 'axios';
+import moment from 'moment';
 
 const topCities = [
 	{textKey: 'IEV', valueKey: 'Kiev'},
@@ -37,12 +38,24 @@ export function setDestination(destination, target = "") {
 	return { type: 'SET_DESTINATION_' + target.toUpperCase(), payload: destination }
 }
 
-export function setDate(destination, target = "") {
+function setDate(destination, target=""){
 	return { type: 'SET_DATE_' + target.toUpperCase(), payload: destination }
 }
 
+export function setDateWithRelated(destination, target = "", related = "") {
+	return (dispatch, getState) => {
+		if (target == 'departure'){
+			let rd = getState().returnDate;
+			if (rd && moment(rd).diff(destination, 'month') > 3){
+				dispatch(setDate(moment(destination).add(3, 'month').toDate(), "return"));
+			}
+		}
+		dispatch(setDate(destination, target)); 
+
+	}
+}
+
 export function getSearchResults(quote) {
-	console.log('q', quote)
 	return function (dispatch) {
 		dispatch(showLoadingResults()) 
 		return axios.get('/api/cheapest', {params: quote})

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Destination from '../components/destination';
 import DateComp from '../components/date';
 import FindButton from '../components/findButton';
-import { enterText, setDestination, setDate, getSearchResults } from '../actions/index';
+import { enterText, setDestination, setDateWithRelated, getSearchResults } from '../actions/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import moment from 'moment'; 
@@ -19,7 +19,7 @@ class QuoteBox extends Component {
   	}
 
   	onSelectDate(target, date) {
-		this.props.setDate(date, target);
+		this.props.setDateWithRelated(date, target);
   	}
 
   	doSearch() {
@@ -44,20 +44,23 @@ class QuoteBox extends Component {
 						enterText={this.props.enterText.bind(this)} 
 						onSelectSuggest={this.onSelectSuggest.bind(this, "origin")}
 						onFocusEmpty={this.onFocusEmpty.bind(this)}
-						dataSource={this.props.originSuggests}
-					/>
+						dataSource={this.props.originSuggests} />
 					<Destination 
 						direction="To" 
 						key="dest-to" 
 						enterText={this.props.enterText.bind(this)}
 						onSelectSuggest={this.onSelectSuggest.bind(this, "destination")} 
 						onFocusEmpty={this.onFocusEmpty.bind(this)}
-						dataSource={this.props.destinationSuggests}
-					/>
+						dataSource={this.props.destinationSuggests}	/>
 				</div>
 				<div class="row">
-					<DateComp label="Departure" onChange={this.onSelectDate.bind(this, "departure")} />
-					<DateComp label="Return" onChange={this.onSelectDate.bind(this, "return")} />
+					<DateComp label="Departure" onChange={this.onSelectDate.bind(this, "departure")} value={this.props.departureDate} />
+					<DateComp 
+						label="Return"
+						onChange={this.onSelectDate.bind(this, "return")}
+						value={this.props.returnDate} 
+						minDate={this.props.departureDate} 
+						maxDate={moment(this.props.departureDate).add(3, 'month').toDate()} />
 				</div>
 				<div class="row pull-right">
 					<FindButton onClick={this.doSearch.bind(this)}/>
@@ -82,7 +85,7 @@ function mapDispatchToProps(dispatch) {
   	return bindActionCreators({ 
   		enterText: enterText, 
   		setDestination: setDestination, 
-  		setDate: setDate,
+  		setDateWithRelated: setDateWithRelated,
   		getSearchResults: getSearchResults
   	}, dispatch);
 }

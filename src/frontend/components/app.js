@@ -11,3 +11,7 @@ export default class App extends Component {
 		</div>;
 	}
 }
+
+if (module.hot) {
+    module.hot.accept();
+}
