@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
-import QuoteBox from '../containers/quoteBox';
-import ResultsComp from '../containers/resultsComp';
+import Header from './header';
 
 export default class App extends Component {
 	render() {
 		return <div>
-			<QuoteBox />
-			<ResultsComp />
+			<Header/ >
+			{this.props.children}
 		</div>;
 	}
 }
