@@ -10,7 +10,6 @@ fs.readdirSync('node_modules')
     .forEach(function(mod) {
         nodeModules[mod] = 'commonjs ' + mod;
     });
-
 module.exports = {
     frontend: {
         entry: [

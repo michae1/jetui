@@ -68,3 +68,14 @@ export function getSearchResults(quote) {
 		}
 }
 
+export function signinUser({email, password}) {
+	return function (dispatch) {
+		console.log({email, password})
+		return axios.post('/signin', {params: {email, password}})
+			.then(function(res){
+				console.log('res:', res)
+				dispatch({ type: 'AUTH_LOGIN', payload: true })
+			})
+	}
+}
+

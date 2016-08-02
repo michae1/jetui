@@ -20,6 +20,8 @@ const Header = () => (
       >
         <MenuItem primaryText="Hotels"  linkButton={true} href="#hotels" />
         <MenuItem primaryText="Flights"  linkButton={true} href="#" />
+        <MenuItem primaryText="SignIn"  linkButton={true} href="#signin" />
+        <MenuItem primaryText="SignUp"  linkButton={true} href="#signup" />
       </IconMenu>
     }
   />
