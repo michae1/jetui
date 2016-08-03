@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 import { SuggestReducer, DestinationReducer, OriginReducer, DepartureReducer, ReturnReducer } from './reducers_quote';
 import { ResultsReducer } from './reducers_results';
 import {reducer as formReducer} from 'redux-form';
+import authReducer from './reducers_auth';
 
 const rootReducer = combineReducers({
 	originSuggests: SuggestReducer,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
 	departureDate: DepartureReducer,
 	returnDate: ReturnReducer,
 	results: ResultsReducer,
-	form: formReducer 
+	form: formReducer,
+	auth: authReducer 
 });
 
 export default rootReducer;

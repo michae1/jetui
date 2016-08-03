@@ -1,5 +1,13 @@
 import axios from 'axios';
 import moment from 'moment';
+import { hashHistory } from 'react-router';
+
+import {
+  AUTH_USER,
+  UNAUTH_USER,
+  AUTH_ERROR,
+  FETCH_MESSAGE
+} from './types';
 
 const topCities = [
 	{textKey: 'IEV', valueKey: 'Kiev'},
@@ -71,11 +79,40 @@ export function getSearchResults(quote) {
 export function signinUser({email, password}) {
 	return function (dispatch) {
 		console.log({email, password})
-		return axios.post('/signin', {params: {email, password}})
+		return axios.post('/signin', {email, password})
 			.then(function(res){
-				console.log('res:', res)
-				dispatch({ type: 'AUTH_LOGIN', payload: true })
+				dispatch({  type: AUTH_USER });
+				localStorage.setItem('token', res.data.token);
+				hashHistory.push('/');
 			})
 	}
 }
 
+export function signupUser({email, password}) {
+	return function (dispatch) {
+		console.log({email, password})
+		return axios.post('/signup', {email, password})
+			.then(function(res){
+				dispatch({ type: 'AUTH_LOGIN', payload: true });
+				localStorage.setItem('token', res.data.token);
+				hashHistory.push('/');
+			})
+			.catch(response => {
+				console.log('r:',response);
+				dispatch(authError(response.data.error))
+			});
+	}
+}
+
+export function authError(error) {
+  return {
+    type: AUTH_ERROR,
+    payload: error
+  };
+}
+
+export function signoutUser() {
+  localStorage.removeItem('token');
+  hashHistory.push('/');
+  return { type: UNAUTH_USER };
+}
