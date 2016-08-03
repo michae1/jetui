@@ -93,7 +93,7 @@ export function signupUser({email, password}) {
 		console.log({email, password})
 		return axios.post('/signup', {email, password})
 			.then(function(res){
-				dispatch({ type: 'AUTH_LOGIN', payload: true });
+				dispatch({  type: AUTH_USER });
 				localStorage.setItem('token', res.data.token);
 				hashHistory.push('/');
 			})
