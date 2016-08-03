@@ -6,6 +6,8 @@ import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import CircularProgress from 'material-ui/CircularProgress';
 import _ from 'lodash';
 import moment from 'moment'; 
+import ResultsItem from '../components/resultItem';
+
 
 function getMainText(obj){
 	return "$" + _.get(obj, 'MinPrice') + "   " +  _.get(obj, 'OutboundLeg.origin.CityName') + " " + _.get(obj, 'OutboundLeg.destination.CityName');
@@ -28,8 +30,16 @@ class ResultsComp extends Component {
 	    return (
 			<div className='results'>
 					{ this.props.results.items.map(function(object, i){
-				        return <Card key={i}>
-				        	<CardHeader
+				        return <ResultsItem key={i} object={object} />
+				    }) }		
+  
+			</div>
+	    );
+	}
+}
+
+/*
+<CardHeader
 						      title={getMainText(object)}
 						      subtitle={getSecondaryText(object)}
 						      actAsExpander={true}
@@ -39,13 +49,7 @@ class ResultsComp extends Component {
 						      <div>$100</div> Super cheap flight
 						    </CardText>
 				        </Card> 
-				    }) }		
-  
-			</div>
-	    );
-	}
-}
-
+*/
 function mapStateToProps(state) {
 	return {
 		results: state.results,

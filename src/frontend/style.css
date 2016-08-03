@@ -6,8 +6,9 @@ body {
 }
 .quote-box {
 	text-align: center;
-	color: red;
+	/*color: red;*/
 	margin: 50px;
+	font-size: 26px;
 }
 
 .destination {
@@ -32,4 +33,30 @@ body {
 .form {
 	text-align: center;
 	margin-top: 100px;	
+}
+
+.result-item {
+	text-align: left;
+}
+
+.result-item div {
+	display: inline-block;
+	text-align: left;
+}
+
+.result-item .price {
+	text-align: left;
+	font-weight: bold;
+	font-size: 22px;
+	padding: 20px;
+}
+
+.result-item .dest div {
+	font-size: 16px;
+	padding: 10px;
+}
+
+.result-item .dates div {
+	font-size: 16px;
+	padding: 10px;
 }
