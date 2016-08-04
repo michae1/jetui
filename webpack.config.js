@@ -17,7 +17,7 @@ module.exports = {
             './src/frontend/index.js'
         ],
         output: {
-            path: path.join(path.resolve(path.dirname()), 'build/static'),
+            path: path.join(path.resolve(path.dirname('./')), 'build/static'),
             filename: 'frontend.js',
             publicPath: '/build/static/'
         },

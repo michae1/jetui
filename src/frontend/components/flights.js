@@ -4,11 +4,11 @@ import QuoteBox from '../containers/quoteBox';
 import ResultsComp from '../containers/resultsComp';
 
 export default class Flights extends Component {
-	render() {
-		return <div>
-			<QuoteBox />
-			<ResultsComp />
-		</div>;
-	}
+    render() {
+        return (<div>
+            <QuoteBox />
+            <ResultsComp />
+        </div>);
+    }
 }
 

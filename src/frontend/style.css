@@ -4,6 +4,7 @@ body {
 	font-size: 15px;
   	line-height: 24px;
 }
+
 .quote-box {
 	text-align: center;
 	/*color: red;*/
@@ -59,4 +60,10 @@ body {
 .result-item .dates div {
 	font-size: 16px;
 	padding: 10px;
+}
+
+.danger {
+	color: red;
+	font-size: 18px;
+	padding: 5px;
 }
