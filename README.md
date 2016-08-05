@@ -2,7 +2,7 @@
 
 Simple cheap flights search (React/Redux)
 
-![jetui.png](https://bitbucket.org/repo/9a4Xgr/images/916421502-jetui.png)
+![jetui](https://cloud.githubusercontent.com/assets/644385/17430119/28bd9c08-5afb-11e6-9394-fa2059659aaf.png)
 
 ### Run ###
 
@@ -13,10 +13,10 @@ Simple cheap flights search (React/Redux)
 
 ### Working parts ###
 
-* Search based on one quote parameter
+* Search based on one or more quote parameter
+* Signup/Signin
 
 ### Todo ###
 
-* Usable results
-* Display errors
-* Config (API key url etc)
+* Usable results (Booking links)
+* Config (API key, urls etc)
