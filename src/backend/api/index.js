@@ -1,5 +1,7 @@
 'use strict';
 
+// Just a proxy to avoid cross origin issues :(
+
 var express = require( 'express' ),
     bodyParser = require('body-parser'),
     _ = require('lodash'),
